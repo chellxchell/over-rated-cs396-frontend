@@ -10,11 +10,11 @@ const SignUp = StyleSheet.create({
     left: {
         height: '100%',
         width: '50%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         backgroundColor: colors.secondaryColor,
         padding: '10%'
+    },
+    right: {
+        width: '50%'
     },
 
     h1: {

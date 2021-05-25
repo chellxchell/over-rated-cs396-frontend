@@ -38,8 +38,33 @@ export default function SignUpForm({navigation}) {
         }
     }
 
+    // post a new object
     function submitForm(){
-        console.log(name, username, password, confirmPassword)
+        const url = new URL("http://localhost:8081/signup")
+        let data = {
+            "name": name,
+            "username": username,
+            "password": password
+        }
+
+        fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('Success:', data);
+        })
+        // console.log(name, username, password, confirmPassword)
     }
 
     return (

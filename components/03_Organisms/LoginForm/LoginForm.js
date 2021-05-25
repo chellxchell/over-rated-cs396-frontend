@@ -28,6 +28,31 @@ export default function LoginForm() {
     }
 
     function submitForm(){
+        const url = new URL("http://localhost:8081/login")
+        let data = {
+            "username": username,
+            "password": password
+        }
+
+        // check if there's actually a user
+
+        fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw Error(response.statusText);
+            } else {
+                return response.json();
+            }
+        })
+        .then(data => {
+            console.log('Success:', data);
+        })
         console.log(username, password)
     }
 

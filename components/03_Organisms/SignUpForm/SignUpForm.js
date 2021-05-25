@@ -63,6 +63,8 @@ export default function SignUpForm({navigation}) {
         })
         .then(data => {
             console.log('Success:', data);
+            navigation.navigate('Profile', { user: data })
+
         })
         // console.log(name, username, password, confirmPassword)
     }

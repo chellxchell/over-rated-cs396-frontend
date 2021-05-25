@@ -4,7 +4,7 @@ import styles from './LoginForm.styling';
 import Button from '../../01_Atoms/Button/Button';
 import utilities from '../../../settings/utilities';
 
-export default function LoginForm() {
+export default function LoginForm({navigation}) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [alertMessage, setAlertMessage] = useState(''); // if there's an error in the form
@@ -52,8 +52,9 @@ export default function LoginForm() {
         })
         .then(data => {
             console.log('Success:', data);
+            navigation.navigate('Profile', { user: data._doc })
+
         })
-        console.log(username, password)
     }
 
     return (

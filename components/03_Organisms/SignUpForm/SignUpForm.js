@@ -56,7 +56,7 @@ export default function SignUpForm({navigation}) {
         })
         .then(response => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                setAlertMessage('Username already exists')
             } else {
                 return response.json();
             }

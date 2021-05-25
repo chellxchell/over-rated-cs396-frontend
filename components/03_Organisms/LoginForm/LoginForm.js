@@ -45,7 +45,7 @@ export default function LoginForm() {
         })
         .then(response => {
             if (!response.ok) {
-                throw Error(response.statusText);
+                setAlertMessage('No username found')
             } else {
                 return response.json();
             }

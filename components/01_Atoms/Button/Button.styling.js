@@ -8,8 +8,20 @@ const Button = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: colors.primaryColor,
     },
+    button_secondary: {
+        height: 40,
+        width: 130,
+        borderRadius: 5,
+        borderColor: colors.primaryColor,
+        borderWidth: 1,
+        backgroundColor: 'transparent',
+    },
+
     button__text: {
         color: 'white'
+    },
+    button__text_secondary:{
+        color: colors.primaryColor
     }
   });
   

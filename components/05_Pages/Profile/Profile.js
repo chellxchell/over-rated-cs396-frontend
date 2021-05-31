@@ -5,11 +5,14 @@ import utilities from '../../../settings/utilities';
 import FriendsList from '../../03_Organisms/FriendsList/FriendsList';
 import Review from '../../02_Molecules/Review/Review';
 import Button from '../../01_Atoms/Button/Button';
+import ReviewForm from '../../03_Organisms/ReviewForm/ReviewForm';
 
 export default function Profile({ navigation, route }) {
     const [user, setUser] = useState(route.params.user);
     const [avgRating, setAvgRating] = useState(0);
     const [ratings, setRatings] = useState([]);
+
+    const [reviewFormVisible, setReviewFormVisible] = useState(false);
 
     const url = new URL("http://localhost:8081/reviews/" + user._id)
 
@@ -27,6 +30,8 @@ export default function Profile({ navigation, route }) {
 
     return (
         <View style={styles.Profile}>
+            <ReviewForm visible={reviewFormVisible} setVisible={setReviewFormVisible}/>
+
             <View style={styles.friendsListContainer}>
                 <FriendsList setUser={setUser} />
             </View>
@@ -45,7 +50,7 @@ export default function Profile({ navigation, route }) {
                         <Text style={styles.profileInfo__bio}>{user.bio || ''}</Text>
                         <Text style={styles.profileInfo__rating}>{avgRating}-Star Average Rating</Text>
                         <View style={{marginTop: 15}}>
-                            <Button title="Leave A Review"/>
+                            <Button title="Leave A Review" onPress={() => setReviewFormVisible(true)}/>
                         </View>
                     </View>
                 </View>

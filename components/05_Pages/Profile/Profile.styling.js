@@ -13,11 +13,30 @@ const Profile = StyleSheet.create({
     },
 
     profileInfoContainer: {
-        width: '70%'
+        backgroundColor: colors.tertiaryColor,
+        height: '40%',
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly'
+    },
+    profileInfo__name:{
+        fontWeight: 'bold',
+        fontSize: 32
+    },
+    profileInfo__username:{
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: 'gray',
+        marginBottom: 10
     },
     profilePicture: {
         height: 200,
         width: 200,
+    },
+
+    ratingInfoContainer:{
+        height: '100%'
     }
   });
   

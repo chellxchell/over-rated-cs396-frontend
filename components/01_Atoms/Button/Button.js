@@ -1,7 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text} from "react-native";
 import styles from './Button.styling';
-import {colors} from '../../../settings/colors';
 import utilities from '../../../settings/utilities';
 
 

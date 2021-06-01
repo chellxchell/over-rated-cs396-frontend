@@ -28,6 +28,15 @@ const ReviewForm = StyleSheet.create({
         border: '1px solid gray',
         borderRadius: 5,
         paddingLeft: 10
+    },
+    buttonContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    alertMessage: {
+        color: 'red'
     }
 });
 

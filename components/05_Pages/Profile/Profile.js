@@ -8,6 +8,7 @@ import Button from '../../01_Atoms/Button/Button';
 import ReviewForm from '../../03_Organisms/ReviewForm/ReviewForm';
 
 export default function Profile({ navigation, route }) {
+
     const [user, setUser] = useState(route.params.user);
     const [avgRating, setAvgRating] = useState(0);
     const [ratings, setRatings] = useState([]);
@@ -16,7 +17,7 @@ export default function Profile({ navigation, route }) {
 
     const url = new URL("http://localhost:8081/reviews/" + user._id)
 
-    useEffect(() => {
+    useEffect(() => {     
         async function getReviews() {
             let response = await fetch(url);
             response = await response.json()
@@ -30,7 +31,7 @@ export default function Profile({ navigation, route }) {
 
     return (
         <View style={styles.Profile}>
-            <ReviewForm visible={reviewFormVisible} setVisible={setReviewFormVisible}/>
+            <ReviewForm visible={reviewFormVisible} setVisible={setReviewFormVisible} toUser={user}/>
 
             <View style={styles.friendsListContainer}>
                 <FriendsList setUser={setUser} />

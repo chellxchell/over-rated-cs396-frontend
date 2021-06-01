@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { View, Text, TextInput, Alert } from "react-native";
 import styles from './LoginForm.styling';
 import Button from '../../01_Atoms/Button/Button';
 import utilities from '../../../settings/utilities';
 
+import AppContext from '../../AppContext';
+
+
 export default function LoginForm({navigation}) {
+    const myContext = useContext(AppContext);
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [alertMessage, setAlertMessage] = useState(''); // if there's an error in the form
@@ -52,6 +57,7 @@ export default function LoginForm({navigation}) {
         })
         .then(data => {
             console.log('Success:', data);
+            myContext.setCurrUser(data._doc);
             navigation.navigate('Profile', { user: data._doc })
 
         })

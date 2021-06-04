@@ -23,7 +23,7 @@ export default function Review({ rating }) {
                 <Image
                     style={styles.review__userPicture}
                     source={{
-                        uri: 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png',
+                        uri: 'https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png',
                     }} />
                 <Text style={styles.review__username}>{user.name}</Text>
                 </View>

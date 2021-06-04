@@ -16,7 +16,7 @@ export default function FriendsList({setUser}) {
         }
         getFriends()
 
-    }, [friends]);
+    }, []);
     
     return (
         <>

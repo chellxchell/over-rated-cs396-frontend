@@ -42,7 +42,7 @@ export default function Profile({ navigation, route }) {
                     <Image
                         style={styles.profilePicture}
                         source={{
-                            uri: 'https://www.pngitem.com/pimgs/m/30-307416_profile-icon-png-image-free-download-searchpng-employee.png',
+                            uri: 'https://cdn4.iconfinder.com/data/icons/e-commerce-181/512/477_profile__avatar__man_-512.png',
                         }} />
 
                     <View style={styles.profileInfo}>

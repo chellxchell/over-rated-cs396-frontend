@@ -16,20 +16,9 @@ export default function FriendsList({ user, setUser }) {
     const [friends, setFriends] = useState([]);
     const [requests, setRequests] = useState([]);
 
-    const fake_data = [
-        {
-            "name": "Dwight Schrute",
-            "id": "6075029f746e3f38a5f0e948"
-        },
-        {
-            "name": "Jim Halpert",
-            "id": "6075029f746e3f38a5f0e949"
-        }
-    ]
-
     useEffect(() => {
         async function getAllUsers() {
-            let url = new URL("http://localhost:8081/users")
+            let url = new URL("http://overrated-server.herokuapp.com/users")
             let response = await fetch(url);
             response = await response.json()
             setAllUsers(response["users"])
@@ -46,7 +35,7 @@ export default function FriendsList({ user, setUser }) {
         getFriends()
 
         async function getRequests() {
-            let url = new URL("http://localhost:8081/requests/" + currUser._id)
+            let url = new URL("http://overrated-server.herokuapp.com/requests/" + currUser._id)
             let response = await fetch(url);
             response = await response.json()
             console.log('response', response)
@@ -62,7 +51,7 @@ export default function FriendsList({ user, setUser }) {
     }, []);
 
     async function getUser(id) {
-        let url = new URL("http://localhost:8081/users/" + id)
+        let url = new URL("http://overrated-server.herokuapp.com/users/" + id)
         let response = await fetch(url);
         response = await response.json()
         return response

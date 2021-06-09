@@ -40,7 +40,7 @@ export default function SignUpForm({navigation}) {
 
     // post a new object
     function submitForm(){
-        const url = new URL("http://localhost:8081/signup")
+        const url = new URL("http://overrated-server.herokuapp.com/signup")
         let data = {
             "name": name,
             "username": username,

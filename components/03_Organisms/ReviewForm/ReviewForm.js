@@ -31,7 +31,7 @@ export default function ReviewForm({ visible, setVisible, toUser }) {
 
 // post a new object
 function submitForm(){
-    const url = new URL("http://localhost:8081/reviews")
+    const url = new URL("http://overrated-server.herokuapp.com/reviews")
     let data = {
         "value" : rating,
         "review" : comment,

@@ -17,14 +17,14 @@ export default function Profile({ navigation, route }) {
     const [user, setUser] = useState(route.params.user);
     const [avgRating, setAvgRating] = useState(0);
     const [ratings, setRatings] = useState([]);
-    // const [friendReqSent, setFriendReqSent] = useState(user.requests.includes(currUser._id));
+    const [friendReqSent, setFriendReqSent] = useState(user.requests.includes(currUser._id));
 
     const [reviewFormVisible, setReviewFormVisible] = useState(false);
 
 
     useEffect(() => {     
         async function getReviews() {
-            let url = new URL("http://localhost:8081/reviews/" + user._id)
+            let url = new URL("http://overrated-server.herokuapp.com/reviews/" + user._id)
             let response = await fetch(url);
             response = await response.json()
 
@@ -36,7 +36,7 @@ export default function Profile({ navigation, route }) {
     },[user]);
 
     function sendFriendRequest(){
-        let url = new URL("http://localhost:8081/requests/" + currUser._id)
+        let url = new URL("http://overrated-server.herokuapp.com/requests/" + currUser._id)
         let data = {
             "to" : user._id
         };
@@ -57,7 +57,7 @@ export default function Profile({ navigation, route }) {
     })
     .then(data => {
         console.log('Success:', data);
-        // setFriendReqSent(true);
+        setFriendReqSent(true);
     })
     }
     return (
@@ -88,7 +88,8 @@ export default function Profile({ navigation, route }) {
                                 {
                                     // can't friend them if they are already friends
                                     !(currUser.friends.includes(user._id)) ?
-                                    <Button disabled={user.requests.includes(currUser._id)} title={user.requests.includes(currUser._id) ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
+                                    <Button disabled={friendReqSent} title={friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
+                                    // <Button disabled={user.requests.includes(currUser._id)} title={user.requests.includes(currUser._id) ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
                                     :
                                     null
                                 }

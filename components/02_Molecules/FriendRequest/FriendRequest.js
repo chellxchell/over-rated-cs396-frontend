@@ -8,7 +8,7 @@ import { Icon } from 'react-native-elements'
 export default function FriendRequest({ currUser, fromUser }) {
     const [reqHandled, setReqHandled] = useState('');
 
-    const url = new URL("http://localhost:8081/handleRequest")
+    const url = new URL("http://overrated-server.herokuapp.com/handleRequest")
 
     function acceptRequest() {
         let data = {

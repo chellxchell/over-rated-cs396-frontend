@@ -6,7 +6,7 @@ import utilities from '../../../settings/utilities';
 
 export default function Review({ rating }) {
     const [user, setUser] = useState({})
-    const url = new URL("http://localhost:8081/users/" + rating.from)
+    const url = new URL("http://overrated-server.herokuapp.com/users/" + rating.from)
 
     useEffect(() => {
         async function getUser() {

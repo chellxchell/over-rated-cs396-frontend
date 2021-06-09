@@ -33,7 +33,7 @@ export default function LoginForm({navigation}) {
     }
 
     function submitForm(){
-        const url = new URL("http://localhost:8081/login")
+        const url = new URL("http://overrated-server.herokuapp.com/login")
         let data = {
             "username": username,
             "password": password

@@ -76,12 +76,7 @@ export default function FriendsList({user, setUser}) {
             </View>
 
             {fake_data.map((request) => (
-                <FriendRequest currUser={currUser} fromUser={user}/>
-                // <View style={styles.friend}>
-                //     <TouchableOpacity>
-                //         <Text style={styles.friend__name}>{request.name}</Text>
-                //     </TouchableOpacity>
-                // </View>
+                <FriendRequest currUser={currUser} fromUser={request}/>
             ))}
         </>
     );

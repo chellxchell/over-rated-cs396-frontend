@@ -28,10 +28,11 @@ export default function FriendsList({user, setUser}) {
 
     useEffect(() => {
         async function getFriends() {
-            let url = new URL("http://localhost:8081/users")
-            let response = await fetch(url);
-            response = await response.json()
-            setFriends(response["users"])
+            let friends_list = []
+            for (var friend_id of currUser.friends){
+                friends_list.push(await getUser(friend_id))
+            }
+            setFriends(friends_list)
         }
         getFriends()
 
@@ -40,12 +41,12 @@ export default function FriendsList({user, setUser}) {
             let response = await fetch(url);
             response = await response.json()
             console.log('response',response)
-            let friends_list = []
-            for (var friend_id in response){
-                friends_list.push(await getUser(friend_id))
+            let req_list = []
+            for (var friend_id of response){
+                console.log('friend_id', friend_id)
+                req_list.push(await getUser(friend_id))
             }
-            console.log('requests',friends_list)
-            setRequests(friends_list)
+            setRequests(req_list)
         }
         getRequests()
 
@@ -75,7 +76,7 @@ export default function FriendsList({user, setUser}) {
                 <Text style={styles.friendsHeader__title}>Friend Requests</Text>
             </View>
 
-            {fake_data.map((request) => (
+            {requests.map((request) => (
                 <FriendRequest currUser={currUser} fromUser={request}/>
             ))}
         </>

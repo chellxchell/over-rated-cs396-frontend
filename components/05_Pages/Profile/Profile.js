@@ -86,7 +86,8 @@ export default function Profile({ navigation, route }) {
                             currUser._id != user._id ? 
                             <View style={styles.buttonContainer}>
                                 <Button title="Leave A Review" onPress={() => setReviewFormVisible(true)}/>
-                                <Button title={friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
+                                <Button disabled={friendReqSent} title={friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
+                                {/* <Button disabled={(!(!user._id in currUser.friends) && !friendReqSent)} title={(user._id in currUser.friends) ? "You're friends already!" : friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/> */}
                             </View>
                             :
                             null

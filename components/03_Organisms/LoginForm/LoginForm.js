@@ -50,16 +50,17 @@ export default function LoginForm({navigation}) {
         })
         .then(response => {
             if (!response.ok) {
-                setAlertMessage('No username found')
+                setAlertMessage('Invalid login')
             } else {
                 return response.json();
             }
         })
         .then(data => {
-            console.log('Success:', data);
-            myContext.setCurrUser(data._doc);
-            navigation.navigate('Profile', { user: data._doc })
-
+            if (data){
+                console.log('Success:', data);
+                myContext.setCurrUser(data._doc);
+                navigation.navigate('Profile', { user: data._doc })
+            }
         })
     }
 

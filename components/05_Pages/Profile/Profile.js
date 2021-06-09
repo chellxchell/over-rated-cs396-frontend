@@ -17,7 +17,7 @@ export default function Profile({ navigation, route }) {
     const [user, setUser] = useState(route.params.user);
     const [avgRating, setAvgRating] = useState(0);
     const [ratings, setRatings] = useState([]);
-    const [friendReqSent, setFriendReqSent] = useState(false);
+    // const [friendReqSent, setFriendReqSent] = useState(user.requests.includes(currUser._id));
 
     const [reviewFormVisible, setReviewFormVisible] = useState(false);
 
@@ -49,7 +49,6 @@ export default function Profile({ navigation, route }) {
         body: JSON.stringify(data)
     })
     .then(response => {
-        console.log(response)
         if (!response.ok) {
             setAlertMessage('Something went wrong')
         } else {
@@ -58,7 +57,7 @@ export default function Profile({ navigation, route }) {
     })
     .then(data => {
         console.log('Success:', data);
-        setFriendReqSent(true);
+        // setFriendReqSent(true);
     })
     }
     return (
@@ -81,13 +80,18 @@ export default function Profile({ navigation, route }) {
                         <Text style={styles.profileInfo__name}>{user.name}</Text>
                         <Text style={styles.profileInfo__username}>@{user.username}</Text>
                         <Text style={styles.profileInfo__bio}>{user.bio || ''}</Text>
-                        <Text style={styles.profileInfo__rating}>{avgRating}-Star Average Rating</Text>
+                        <Text style={styles.profileInfo__rating}>{avgRating ? `${avgRating}-Star Average Rating` : 'No Ratings Yet'}</Text>
                         {
                             currUser._id != user._id ? 
                             <View style={styles.buttonContainer}>
                                 <Button title="Leave A Review" onPress={() => setReviewFormVisible(true)}/>
-                                <Button disabled={friendReqSent} title={friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
-                                {/* <Button disabled={(!(!user._id in currUser.friends) && !friendReqSent)} title={(user._id in currUser.friends) ? "You're friends already!" : friendReqSent ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/> */}
+                                {
+                                    // can't friend them if they are already friends
+                                    !(currUser.friends.includes(user._id)) ?
+                                    <Button disabled={user.requests.includes(currUser._id)} title={user.requests.includes(currUser._id) ? "Friend Request Sent" : "Send Friend Request"} onPress={() => sendFriendRequest()}/>
+                                    :
+                                    null
+                                }
                             </View>
                             :
                             null

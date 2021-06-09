@@ -7,7 +7,7 @@ import utilities from '../../../settings/utilities';
 export default function OurButton({title, onPress, type, disabled}) {
 
     return (
-        <TouchableOpacity disabled={disabled} style={[utilities.flexCenter, type == "secondary" ? styles.button_secondary : styles.button, ]} onPress={onPress} >
+        <TouchableOpacity disabled={disabled} style={[utilities.flexCenter, disabled ? styles.button_disabled : type == "secondary" ? styles.button_secondary : styles.button, ]} onPress={onPress} >
             <Text style={type == "secondary" ? styles.button__text_secondary : styles.button__text}>{title}</Text>
         </TouchableOpacity>
     );

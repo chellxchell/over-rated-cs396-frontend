@@ -23,6 +23,14 @@ const Button = StyleSheet.create({
     },
     button__text_secondary:{
         color: colors.primaryColor
+    },
+
+    button_disabled: {
+        height: 50,
+        width: 150,
+        borderRadius: 5,
+        backgroundColor: 'darkgray',
+        margin: 10
     }
   });
   

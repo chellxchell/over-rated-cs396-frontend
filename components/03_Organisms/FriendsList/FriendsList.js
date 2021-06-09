@@ -7,11 +7,12 @@ import FriendRequest from '../../02_Molecules/FriendRequest/FriendRequest';
 
 import AppContext from '../../AppContext';
 
-export default function FriendsList({user, setUser}) {
+export default function FriendsList({ user, setUser }) {
     // for global state (who is the current user)
     const myContext = useContext(AppContext);
     const currUser = myContext.user;
 
+    const [allUsers, setAllUsers] = useState([]);
     const [friends, setFriends] = useState([]);
     const [requests, setRequests] = useState([]);
 
@@ -27,9 +28,17 @@ export default function FriendsList({user, setUser}) {
     ]
 
     useEffect(() => {
+        async function getAllUsers() {
+            let url = new URL("http://localhost:8081/users")
+            let response = await fetch(url);
+            response = await response.json()
+            setAllUsers(response["users"])
+        }
+        getAllUsers()
+
         async function getFriends() {
             let friends_list = []
-            for (var friend_id of currUser.friends){
+            for (var friend_id of currUser.friends) {
                 friends_list.push(await getUser(friend_id))
             }
             setFriends(friends_list)
@@ -40,9 +49,9 @@ export default function FriendsList({user, setUser}) {
             let url = new URL("http://localhost:8081/requests/" + currUser._id)
             let response = await fetch(url);
             response = await response.json()
-            console.log('response',response)
+            console.log('response', response)
             let req_list = []
-            for (var friend_id of response){
+            for (var friend_id of response) {
                 console.log('friend_id', friend_id)
                 req_list.push(await getUser(friend_id))
             }
@@ -51,8 +60,8 @@ export default function FriendsList({user, setUser}) {
         getRequests()
 
     }, []);
-    
-    async function getUser(id){
+
+    async function getUser(id) {
         let url = new URL("http://localhost:8081/users/" + id)
         let response = await fetch(url);
         response = await response.json()
@@ -60,24 +69,44 @@ export default function FriendsList({user, setUser}) {
     }
     return (
         <>
-            <View style={styles.friendsHeader}>
-                <Text style={styles.friendsHeader__title}>Friends</Text>
-            </View>
-            
+            {currUser.friends.length > 0 ?
+                <View style={styles.friendsHeader}>
+                    <Text style={styles.friendsHeader__title}>Friends</Text>
+                </View>
+                :
+                null
+            }
+
+
             {friends.map((friend) => (
                 <View style={styles.friend}>
-                    <TouchableOpacity onPress={()=>setUser(friend)}>
+                    <TouchableOpacity onPress={() => setUser(friend)}>
                         <Text style={styles.friend__name}>{friend.name}</Text>
                     </TouchableOpacity>
                 </View>
             ))}
 
-            <View style={styles.friendsHeader}>
-                <Text style={styles.friendsHeader__title}>Friend Requests</Text>
-            </View>
+            {currUser.requests.length > 0 ?
+                <View style={styles.friendsHeader}>
+                    <Text style={styles.friendsHeader__title}>Friend Requests</Text>
+                </View>
+                : null
+            }
 
             {requests.map((request) => (
-                <FriendRequest currUser={currUser} fromUser={request}/>
+                <FriendRequest currUser={currUser} fromUser={request} />
+            ))}
+
+            <View style={styles.friendsHeader}>
+                <Text style={styles.friendsHeader__title}>All Users on Over-Rated</Text>
+            </View>
+
+            {allUsers.map((friend) => (
+                <View style={styles.friend}>
+                    <TouchableOpacity onPress={() => setUser(friend)}>
+                        <Text style={styles.friend__name}>{friend.name}</Text>
+                    </TouchableOpacity>
+                </View>
             ))}
         </>
     );

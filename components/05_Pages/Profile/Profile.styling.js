@@ -37,6 +37,14 @@ const Profile = StyleSheet.create({
 
     ratingInfoContainer:{
         height: '100%'
+    },
+
+    buttonContainer: {
+        marginTop: 15,
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '100%'
     }
   });
   

@@ -7,6 +7,7 @@ const Button = StyleSheet.create({
         width: 150,
         borderRadius: 5,
         backgroundColor: colors.primaryColor,
+        margin: 10
     },
     button_secondary: {
         height: 40,
